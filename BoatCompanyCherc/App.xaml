@@ -2,8 +2,20 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:BoatCompanyCherc"
-             StartupUri="MainWindow.xaml">
+             StartupUri="AutorizationWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="Window">
+            <Setter Property="FontFamily"
+                    Value="Arial"/>
+        </Style>
+        <Style TargetType="Page">
+            <Setter Property="FontFamily"
+                    Value="Arial"/>
+        </Style>
+        <SolidColorBrush x:Key="firstMain" Color="#FF004165"/>
+        <SolidColorBrush x:Key="secondMain" Color="#FF009FDA"/>
+        <SolidColorBrush x:Key="firstAtten" Color="#FFCF2F44"/>
+        <SolidColorBrush x:Key="secondAtten" Color="#FFD10074"/>
+        <SolidColorBrush x:Key="thirdAtten" Color="#FFFECB00"/>
     </Application.Resources>
 </Application>

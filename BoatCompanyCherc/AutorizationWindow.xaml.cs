@@ -12,17 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BoatCompanyCherc.Service;
+using BoatCompanyCherc.Views;
 
 namespace BoatCompanyCherc
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AutorizationWindow : Window
     {
-        public MainWindow()
+        public AutorizationWindow()
         {
             InitializeComponent();
+            Style = (Style)FindResource(typeof(Window));
+            FrameManager.MainFrame = mainFrame;
+            FrameManager.MainFrame.Navigate(new MainPage());
+
         }
     }
 }

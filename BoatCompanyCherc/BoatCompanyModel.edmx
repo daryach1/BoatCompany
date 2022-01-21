@@ -1,0 +1,1098 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище BoatCompanyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accessory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="accName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="decriptionOfAccessory" Type="nvarchar(max)" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VAT" Type="decimal" Precision="9" Scale="3" />
+          <Property Name="inventory" Type="int" />
+          <Property Name="orderLevel" Type="int" />
+          <Property Name="orderBatch" Type="int" />
+          <Property Name="partner_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Boat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="boatType_id" Type="int" />
+          <Property Name="NumberOfRower" Type="int" />
+          <Property Name="Mast" Type="bit" />
+          <Property Name="Color_id" Type="int" />
+          <Property Name="wood_id" Type="int" />
+          <Property Name="basePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VAT" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="BoatAccessory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accessory_id" Type="int" />
+          <Property Name="boat_id" Type="int" />
+        </EntityType>
+        <EntityType Name="BoatType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="depositPayed" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="order_id" Type="int" />
+          <Property Name="contractTotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ContracTotalPrice_inclVAT" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="production_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FamilyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="OrganisationName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="int" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="idDocumentName" Type="int" />
+        </EntityType>
+        <EntityType Name="DocumentName">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="salesperson_id" Type="int" />
+          <Property Name="customer_id" Type="int" />
+          <Property Name="boat_id" Type="int" />
+          <Property Name="deliveryaddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="city" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accessory_id" Type="int" />
+          <Property Name="order_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Partner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="city" Type="int" />
+        </EntityType>
+        <EntityType Name="ProdictionProcess">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalesPerson">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FamilyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wood">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Accessory_Partner">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Accessory">
+              <PropertyRef Name="partner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boat_BoatType">
+          <End Role="BoatType" Type="Self.BoatType" Multiplicity="0..1" />
+          <End Role="Boat" Type="Self.Boat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BoatType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boat">
+              <PropertyRef Name="boatType_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boat_Color">
+          <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+          <End Role="Boat" Type="Self.Boat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boat">
+              <PropertyRef Name="Color_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boat_Wood">
+          <End Role="Wood" Type="Self.Wood" Multiplicity="0..1" />
+          <End Role="Boat" Type="Self.Boat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wood">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boat">
+              <PropertyRef Name="wood_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BoatAccessory_Accessory">
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="0..1" />
+          <End Role="BoatAccessory" Type="Self.BoatAccessory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BoatAccessory">
+              <PropertyRef Name="accessory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BoatAccessory_Boat">
+          <End Role="Boat" Type="Self.Boat" Multiplicity="0..1" />
+          <End Role="BoatAccessory" Type="Self.BoatAccessory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BoatAccessory">
+              <PropertyRef Name="boat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_DocumentName">
+          <End Role="DocumentName" Type="Self.DocumentName" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentName">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="idDocumentName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Boat">
+          <End Role="Boat" Type="Self.Boat" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="boat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_SalesPerson">
+          <End Role="SalesPerson" Type="Self.SalesPerson" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesPerson">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="salesperson_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Accessory">
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="accessory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Order1">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_ProdictionProcess">
+          <End Role="ProdictionProcess" Type="Self.ProdictionProcess" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProdictionProcess">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="production_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Partner" Type="Self.Partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partner">
+              <PropertyRef Name="city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище BoatCompanyModelContainer">
+          <EntitySet Name="Accessory" EntityType="Self.Accessory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boat" EntityType="Self.Boat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BoatAccessory" EntityType="Self.BoatAccessory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BoatType" EntityType="Self.BoatType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentName" EntityType="Self.DocumentName" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partner" EntityType="Self.Partner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProdictionProcess" EntityType="Self.ProdictionProcess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesPerson" EntityType="Self.SalesPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wood" EntityType="Self.Wood" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accessory_Partner" Association="Self.FK_Accessory_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="Accessory" EntitySet="Accessory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boat_BoatType" Association="Self.FK_Boat_BoatType">
+            <End Role="BoatType" EntitySet="BoatType" />
+            <End Role="Boat" EntitySet="Boat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boat_Color" Association="Self.FK_Boat_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="Boat" EntitySet="Boat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boat_Wood" Association="Self.FK_Boat_Wood">
+            <End Role="Wood" EntitySet="Wood" />
+            <End Role="Boat" EntitySet="Boat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BoatAccessory_Accessory" Association="Self.FK_BoatAccessory_Accessory">
+            <End Role="Accessory" EntitySet="Accessory" />
+            <End Role="BoatAccessory" EntitySet="BoatAccessory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BoatAccessory_Boat" Association="Self.FK_BoatAccessory_Boat">
+            <End Role="Boat" EntitySet="Boat" />
+            <End Role="BoatAccessory" EntitySet="BoatAccessory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_City" Association="Self.FK_Customer_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_DocumentName" Association="Self.FK_Customer_DocumentName">
+            <End Role="DocumentName" EntitySet="DocumentName" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Boat" Association="Self.FK_Order_Boat">
+            <End Role="Boat" EntitySet="Boat" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_City" Association="Self.FK_Order_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_SalesPerson" Association="Self.FK_Order_SalesPerson">
+            <End Role="SalesPerson" EntitySet="SalesPerson" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Accessory" Association="Self.FK_OrderDetails_Accessory">
+            <End Role="Accessory" EntitySet="Accessory" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Order" Association="Self.FK_OrderDetails_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Order1" Association="Self.FK_OrderDetails_Order1">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_ProdictionProcess" Association="Self.FK_OrderDetails_ProdictionProcess">
+            <End Role="ProdictionProcess" EntitySet="ProdictionProcess" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_City" Association="Self.FK_Partner_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Partner" EntitySet="Partner" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BoatCompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accessory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="accName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="decriptionOfAccessory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VAT" Type="Decimal" Precision="9" Scale="3" />
+          <Property Name="inventory" Type="Int32" />
+          <Property Name="orderLevel" Type="Int32" />
+          <Property Name="orderBatch" Type="Int32" />
+          <Property Name="partner_id" Type="Int32" />
+          <NavigationProperty Name="Partner" Relationship="Self.FK_Accessory_Partner" FromRole="Accessory" ToRole="Partner" />
+          <NavigationProperty Name="BoatAccessory" Relationship="Self.FK_BoatAccessory_Accessory" FromRole="Accessory" ToRole="BoatAccessory" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Accessory" FromRole="Accessory" ToRole="OrderDetails" />
+        </EntityType>
+        <EntityType Name="Boat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="boatType_id" Type="Int32" />
+          <Property Name="NumberOfRower" Type="Int32" />
+          <Property Name="Mast" Type="Boolean" />
+          <Property Name="Color_id" Type="Int32" />
+          <Property Name="wood_id" Type="Int32" />
+          <Property Name="basePrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VAT" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="BoatType" Relationship="Self.FK_Boat_BoatType" FromRole="Boat" ToRole="BoatType" />
+          <NavigationProperty Name="Color" Relationship="Self.FK_Boat_Color" FromRole="Boat" ToRole="Color" />
+          <NavigationProperty Name="Wood" Relationship="Self.FK_Boat_Wood" FromRole="Boat" ToRole="Wood" />
+          <NavigationProperty Name="BoatAccessory" Relationship="Self.FK_BoatAccessory_Boat" FromRole="Boat" ToRole="BoatAccessory" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Boat" FromRole="Boat" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="BoatAccessory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accessory_id" Type="Int32" />
+          <Property Name="boat_id" Type="Int32" />
+          <NavigationProperty Name="Accessory" Relationship="Self.FK_BoatAccessory_Accessory" FromRole="BoatAccessory" ToRole="Accessory" />
+          <NavigationProperty Name="Boat" Relationship="Self.FK_BoatAccessory_Boat" FromRole="BoatAccessory" ToRole="Boat" />
+        </EntityType>
+        <EntityType Name="BoatType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Boat" Relationship="Self.FK_Boat_BoatType" FromRole="BoatType" ToRole="Boat" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_City" FromRole="City" ToRole="Customer" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_City" FromRole="City" ToRole="Order" />
+          <NavigationProperty Name="Partner" Relationship="Self.FK_Partner_City" FromRole="City" ToRole="Partner" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Boat" Relationship="Self.FK_Boat_Color" FromRole="Color" ToRole="Boat" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="depositPayed" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="order_id" Type="Int32" />
+          <Property Name="contractTotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ContracTotalPrice_inclVAT" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="production_id" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_Order" FromRole="Contract" ToRole="Order" />
+          <NavigationProperty Name="ProdictionProcess" Relationship="Self.FK_OrderDetails_ProdictionProcess" FromRole="Contract" ToRole="ProdictionProcess" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FamilyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrganisationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idDocumentName" Type="Int32" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_Customer_City" FromRole="Customer" ToRole="City" />
+          <NavigationProperty Name="DocumentName" Relationship="Self.FK_Customer_DocumentName" FromRole="Customer" ToRole="DocumentName" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Customer" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="DocumentName">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_DocumentName" FromRole="DocumentName" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="salesperson_id" Type="Int32" />
+          <Property Name="customer_id" Type="Int32" />
+          <Property Name="boat_id" Type="Int32" />
+          <Property Name="deliveryaddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="Int32" />
+          <NavigationProperty Name="Boat" Relationship="Self.FK_Order_Boat" FromRole="Order" ToRole="Boat" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_Order_City" FromRole="Order" ToRole="City" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_OrderDetails_Order" FromRole="Order" ToRole="Contract" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Order_Customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="SalesPerson" Relationship="Self.FK_Order_SalesPerson" FromRole="Order" ToRole="SalesPerson" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Order1" FromRole="Order" ToRole="OrderDetails" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accessory_id" Type="Int32" />
+          <Property Name="order_id" Type="Int32" />
+          <NavigationProperty Name="Accessory" Relationship="Self.FK_OrderDetails_Accessory" FromRole="OrderDetails" ToRole="Accessory" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_Order1" FromRole="OrderDetails" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Partner">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="Int32" />
+          <NavigationProperty Name="Accessory" Relationship="Self.FK_Accessory_Partner" FromRole="Partner" ToRole="Accessory" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_Partner_City" FromRole="Partner" ToRole="City" />
+        </EntityType>
+        <EntityType Name="ProdictionProcess">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Contract" Relationship="Self.FK_OrderDetails_ProdictionProcess" FromRole="ProdictionProcess" ToRole="Contract" />
+        </EntityType>
+        <EntityType Name="SalesPerson">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FamilyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_SalesPerson" FromRole="SalesPerson" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Wood">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Boat" Relationship="Self.FK_Boat_Wood" FromRole="Wood" ToRole="Boat" />
+        </EntityType>
+        <Association Name="FK_Accessory_Partner">
+          <End Role="Partner" Type="Self.Partner" Multiplicity="0..1" />
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partner">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Accessory">
+              <PropertyRef Name="partner_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BoatAccessory_Accessory">
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="0..1" />
+          <End Role="BoatAccessory" Type="Self.BoatAccessory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BoatAccessory">
+              <PropertyRef Name="accessory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Accessory">
+          <End Role="Accessory" Type="Self.Accessory" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="accessory_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boat_BoatType">
+          <End Role="BoatType" Type="Self.BoatType" Multiplicity="0..1" />
+          <End Role="Boat" Type="Self.Boat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BoatType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boat">
+              <PropertyRef Name="boatType_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boat_Color">
+          <End Role="Color" Type="Self.Color" Multiplicity="0..1" />
+          <End Role="Boat" Type="Self.Boat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boat">
+              <PropertyRef Name="Color_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Boat_Wood">
+          <End Role="Wood" Type="Self.Wood" Multiplicity="0..1" />
+          <End Role="Boat" Type="Self.Boat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wood">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Boat">
+              <PropertyRef Name="wood_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BoatAccessory_Boat">
+          <End Role="Boat" Type="Self.Boat" Multiplicity="0..1" />
+          <End Role="BoatAccessory" Type="Self.BoatAccessory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="BoatAccessory">
+              <PropertyRef Name="boat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Boat">
+          <End Role="Boat" Type="Self.Boat" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Boat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="boat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Partner_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Partner" Type="Self.Partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Partner">
+              <PropertyRef Name="city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_ProdictionProcess">
+          <End Role="ProdictionProcess" Type="Self.ProdictionProcess" Multiplicity="0..1" />
+          <End Role="Contract" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProdictionProcess">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Contract">
+              <PropertyRef Name="production_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_DocumentName">
+          <End Role="DocumentName" Type="Self.DocumentName" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentName">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="idDocumentName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_SalesPerson">
+          <End Role="SalesPerson" Type="Self.SalesPerson" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SalesPerson">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="salesperson_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Order1">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BoatCompanyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accessory" EntityType="Self.Accessory" />
+          <EntitySet Name="Boat" EntityType="Self.Boat" />
+          <EntitySet Name="BoatAccessory" EntityType="Self.BoatAccessory" />
+          <EntitySet Name="BoatType" EntityType="Self.BoatType" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Color" EntityType="Self.Color" />
+          <EntitySet Name="Contract" EntityType="Self.Contract" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="DocumentName" EntityType="Self.DocumentName" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" />
+          <EntitySet Name="Partner" EntityType="Self.Partner" />
+          <EntitySet Name="ProdictionProcess" EntityType="Self.ProdictionProcess" />
+          <EntitySet Name="SalesPerson" EntityType="Self.SalesPerson" />
+          <EntitySet Name="Wood" EntityType="Self.Wood" />
+          <AssociationSet Name="FK_Accessory_Partner" Association="Self.FK_Accessory_Partner">
+            <End Role="Partner" EntitySet="Partner" />
+            <End Role="Accessory" EntitySet="Accessory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BoatAccessory_Accessory" Association="Self.FK_BoatAccessory_Accessory">
+            <End Role="Accessory" EntitySet="Accessory" />
+            <End Role="BoatAccessory" EntitySet="BoatAccessory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Accessory" Association="Self.FK_OrderDetails_Accessory">
+            <End Role="Accessory" EntitySet="Accessory" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boat_BoatType" Association="Self.FK_Boat_BoatType">
+            <End Role="BoatType" EntitySet="BoatType" />
+            <End Role="Boat" EntitySet="Boat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boat_Color" Association="Self.FK_Boat_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="Boat" EntitySet="Boat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Boat_Wood" Association="Self.FK_Boat_Wood">
+            <End Role="Wood" EntitySet="Wood" />
+            <End Role="Boat" EntitySet="Boat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BoatAccessory_Boat" Association="Self.FK_BoatAccessory_Boat">
+            <End Role="Boat" EntitySet="Boat" />
+            <End Role="BoatAccessory" EntitySet="BoatAccessory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Boat" Association="Self.FK_Order_Boat">
+            <End Role="Boat" EntitySet="Boat" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_City" Association="Self.FK_Customer_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_City" Association="Self.FK_Order_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Partner_City" Association="Self.FK_Partner_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Partner" EntitySet="Partner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Order" Association="Self.FK_OrderDetails_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_ProdictionProcess" Association="Self.FK_OrderDetails_ProdictionProcess">
+            <End Role="ProdictionProcess" EntitySet="ProdictionProcess" />
+            <End Role="Contract" EntitySet="Contract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_DocumentName" Association="Self.FK_Customer_DocumentName">
+            <End Role="DocumentName" EntitySet="DocumentName" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Customer" Association="Self.FK_Order_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_SalesPerson" Association="Self.FK_Order_SalesPerson">
+            <End Role="SalesPerson" EntitySet="SalesPerson" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Order1" Association="Self.FK_OrderDetails_Order1">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BoatCompanyModelContainer" CdmEntityContainer="BoatCompanyEntities">
+          <EntitySetMapping Name="Accessory">
+            <EntityTypeMapping TypeName="BoatCompanyModel.Accessory">
+              <MappingFragment StoreEntitySet="Accessory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="accName" ColumnName="accName" />
+                <ScalarProperty Name="decriptionOfAccessory" ColumnName="decriptionOfAccessory" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
+                <ScalarProperty Name="inventory" ColumnName="inventory" />
+                <ScalarProperty Name="orderLevel" ColumnName="orderLevel" />
+                <ScalarProperty Name="orderBatch" ColumnName="orderBatch" />
+                <ScalarProperty Name="partner_id" ColumnName="partner_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boat">
+            <EntityTypeMapping TypeName="BoatCompanyModel.Boat">
+              <MappingFragment StoreEntitySet="Boat">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="boatType_id" ColumnName="boatType_id" />
+                <ScalarProperty Name="NumberOfRower" ColumnName="NumberOfRower" />
+                <ScalarProperty Name="Mast" ColumnName="Mast" />
+                <ScalarProperty Name="Color_id" ColumnName="Color_id" />
+                <ScalarProperty Name="wood_id" ColumnName="wood_id" />
+                <ScalarProperty Name="basePrice" ColumnName="basePrice" />
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BoatAccessory">
+            <EntityTypeMapping TypeName="BoatCompanyModel.BoatAccessory">
+              <MappingFragment StoreEntitySet="BoatAccessory">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="accessory_id" ColumnName="accessory_id" />
+                <ScalarProperty Name="boat_id" ColumnName="boat_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BoatType">
+            <EntityTypeMapping TypeName="BoatCompanyModel.BoatType">
+              <MappingFragment StoreEntitySet="BoatType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="BoatCompanyModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Color">
+            <EntityTypeMapping TypeName="BoatCompanyModel.Color">
+              <MappingFragment StoreEntitySet="Color">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contract">
+            <EntityTypeMapping TypeName="BoatCompanyModel.Contract">
+              <MappingFragment StoreEntitySet="Contract">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="depositPayed" ColumnName="depositPayed" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="contractTotalPrice" ColumnName="contractTotalPrice" />
+                <ScalarProperty Name="ContracTotalPrice_inclVAT" ColumnName="ContracTotalPrice_inclVAT" />
+                <ScalarProperty Name="production_id" ColumnName="production_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="BoatCompanyModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="OrganisationName" ColumnName="OrganisationName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="idNumber" ColumnName="idNumber" />
+                <ScalarProperty Name="idDocumentName" ColumnName="idDocumentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentName">
+            <EntityTypeMapping TypeName="BoatCompanyModel.DocumentName">
+              <MappingFragment StoreEntitySet="DocumentName">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="BoatCompanyModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="salesperson_id" ColumnName="salesperson_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="boat_id" ColumnName="boat_id" />
+                <ScalarProperty Name="deliveryaddress" ColumnName="deliveryaddress" />
+                <ScalarProperty Name="city" ColumnName="city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="BoatCompanyModel.OrderDetails">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="accessory_id" ColumnName="accessory_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partner">
+            <EntityTypeMapping TypeName="BoatCompanyModel.Partner">
+              <MappingFragment StoreEntitySet="Partner">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProdictionProcess">
+            <EntityTypeMapping TypeName="BoatCompanyModel.ProdictionProcess">
+              <MappingFragment StoreEntitySet="ProdictionProcess">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesPerson">
+            <EntityTypeMapping TypeName="BoatCompanyModel.SalesPerson">
+              <MappingFragment StoreEntitySet="SalesPerson">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wood">
+            <EntityTypeMapping TypeName="BoatCompanyModel.Wood">
+              <MappingFragment StoreEntitySet="Wood">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
