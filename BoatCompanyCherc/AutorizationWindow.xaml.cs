@@ -30,5 +30,11 @@ namespace BoatCompanyCherc
             FrameManager.MainFrame.Navigate(new MainPage());
 
         }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (FrameManager.MainFrame.CanGoBack)
+                FrameManager.MainFrame.GoBack();
+        }
     }
 }
